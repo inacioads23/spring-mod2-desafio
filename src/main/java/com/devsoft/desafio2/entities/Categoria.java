@@ -1,21 +1,28 @@
 package com.devsoft.desafio2.entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "tb_categoria")
 public class Categoria {
 	
-	@Id //Define o Id como primary key
-	@GeneratedValue(strategy = GenerationType.IDENTITY) //Gera o AUTO INCREMENT
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String descricao;
 	
-	
+	//de Categoria para Atividade: uma-para-muitos. Nome do relacionamento: atividades
+	@OneToMany(mappedBy = "categoria")
+	private List<Atividade> atividades = new ArrayList<>();	
+
 	public Categoria() {
 	}
 
@@ -41,8 +48,8 @@ public class Categoria {
 		this.descricao = descricao;
 	}
 
-	
-	
-	
 
+	public List<Atividade> getAtividades() {
+		return atividades;
+	}
 }

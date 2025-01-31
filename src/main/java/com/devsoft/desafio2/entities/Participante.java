@@ -1,24 +1,32 @@
 package com.devsoft.desafio2.entities;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "tb_participante")
 public class Participante {
 	
-	@Id //Define o Id como primary key
-	@GeneratedValue(strategy = GenerationType.IDENTITY) //Gera o AUTO INCREMENT
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
 	
-	@Column(unique = true) //Não permite duplicação
+	@Column(unique = true)
 	private String email;
-
+	
+	
+	
 	public Participante() {
 	}
 

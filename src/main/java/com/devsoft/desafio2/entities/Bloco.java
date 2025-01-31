@@ -7,22 +7,33 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "tb_bloco")
 public class Bloco {
 	
-	@Id //Define o Id como primary key
-	@GeneratedValue(strategy = GenerationType.IDENTITY) //Gera o AUTO INCREMENT
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	@Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE") //define o tipo correto para o DB
+	@Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
 	private Instant inicio;
 	
-	@Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE") //define o tipo correto para o DB
+	@Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
 	private Instant fim;
-
+	
+	//Bloco para Atividade: um-para-um e muitos-para-um. Nome do relacionamento: atividade
+	@OneToOne
+	
+	//de Bloco para Atividade: muitos-para-um. Nome do relacionamento: atividade
+	@ManyToOne
+	@JoinColumn(name = "atividade_id")
+	private Atividade atividade;
+	
 	
 	public Bloco() {
 	}
