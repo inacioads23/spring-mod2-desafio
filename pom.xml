@@ -8,11 +8,12 @@
 		<version>3.4.2</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
+	
 	<groupId>com.devsoft</groupId>
-	<artifactId>desafio2</artifactId>
+	<artifactId>dscommerce</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>desafio2</name>
-	<description>Desafio2 devsoft</description>
+	<name>dscommerce</name>
+	<description>DSComerce Devsoft</description>
 	<url/>
 	<licenses>
 		<license/>
@@ -56,6 +57,12 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>3.1.0</version> <!--$NO-MVN-MAN-VER$ -->
 			</plugin>
 		</plugins>
 	</build>
