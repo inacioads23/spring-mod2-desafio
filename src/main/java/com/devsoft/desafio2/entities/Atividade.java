@@ -1,10 +1,7 @@
 package com.devsoft.desafio2.entities;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -12,8 +9,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
@@ -32,19 +27,14 @@ public class Atividade {
 	private String descricao;
 	private Double preco;
 	
+	//de Atividade para Participante: um-para-muitos. Nome do relacionamento: participantes	
+	@OneToMany(mappedBy = "atividades")
+	private List<Participante> participantes = new ArrayList<>();
+	
 	//de Atividade para Categoria: Muitos-para-um. Nome do relacionamento: categoria
 	@ManyToOne
 	@JoinColumn(name = "categoria_id")
-	private Categoria categoria;
-	
-	//de Atividade para Participante: muitos-para-muitos
-	@ManyToMany
-	@JoinTable(name = "tb_atividade_participante",
-			joinColumns = @JoinColumn(name = "atividade_id"),
-			inverseJoinColumns = @JoinColumn(name = "participante_id"))
-	private Set<Atividade> participantes = new HashSet<>(); //"Set" para informar ao JPA que não pode haver repetição na listagem
-
-	
+	private Categoria categoria;	
 	
 	//de Atividade para Bloco: um-para-um. Nome do relacionamento: blocos	
 	@OneToOne(mappedBy = "atividade", cascade = CascadeType.ALL)

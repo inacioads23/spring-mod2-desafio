@@ -1,10 +1,16 @@
 package com.devsoft.desafio2.entities;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -19,7 +25,12 @@ public class Participante {
 	@Column(unique = true)
 	private String email;
 	
-	
+	//de Atividade para Participante: muitos-para-muitos
+	@ManyToMany
+	@JoinTable(name = "tb_participante_atividade",
+			joinColumns = @JoinColumn(name = "participante_id"),
+			inverseJoinColumns = @JoinColumn(name = "atividade_id"))
+	private Set<Atividade> atividades = new HashSet<>(); //"Set" para informar ao JPA que não pode haver repetição na listagem
 	
 	public Participante() {
 	}
