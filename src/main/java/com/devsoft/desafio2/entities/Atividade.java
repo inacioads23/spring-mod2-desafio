@@ -48,12 +48,12 @@ public class Atividade {
 	
 	//de Atividade para Bloco: um-para-um. Nome do relacionamento: blocos	
 	@OneToOne(mappedBy = "atividade", cascade = CascadeType.ALL)
-	private Bloco bloco;
+	private Bloco blocos;
 	
 	
 	//de Atividade para Bloco: um-para-muitos. Nome do relacionamento: blocos	
 	@OneToMany(mappedBy = "atividade")
-	private List<Bloco> blocos = new ArrayList<>();
+	private List<Bloco> bloco = new ArrayList<>();
 	
 
 	
