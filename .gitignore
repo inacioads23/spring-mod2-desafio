@@ -31,3 +31,8 @@ build/
 
 ### VS Code ###
 .vscode/
+
+###Arquvivos de teste###
+AtividadeOld.java
+BlocoOld.java
+ParticipanteOld.java

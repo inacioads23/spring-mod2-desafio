@@ -1,7 +1,8 @@
 package com.devsoft.desafio2.entities;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -9,8 +10,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
@@ -27,24 +28,17 @@ public class Atividade {
 	private String descricao;
 	private Double preco;
 	
-	//de Atividade para Participante: um-para-muitos. Nome do relacionamento: participantes	
-	@OneToMany(mappedBy = "atividades")
-	private List<Participante> participantes = new ArrayList<>();
 	
-	//de Atividade para Categoria: Muitos-para-um. Nome do relacionamento: categoria
-	@ManyToOne
-	@JoinColumn(name = "categoria_id")
-	private Categoria categoria;	
-	
-	//de Atividade para Bloco: um-para-um. Nome do relacionamento: blocos	
-	@OneToOne(mappedBy = "atividade", cascade = CascadeType.ALL)
-	private Bloco blocos;
-	
-	
-	//de Atividade para Bloco: um-para-muitos. Nome do relacionamento: blocos	
-	@OneToMany(mappedBy = "atividade")
-	private List<Bloco> bloco = new ArrayList<>();
-	
+	@ManyToMany(mappedBy = "atividades")
+    private Set<Participante> participantes = new HashSet<>();
+    
+    @ManyToOne
+    @JoinColumn(name = "categoria_id")
+    private Categoria categoria;
+    
+    @OneToOne(mappedBy = "atividade", cascade = CascadeType.ALL)
+    private Bloco blocos;   
+   
 
 	
 	public Atividade() {
@@ -88,6 +82,31 @@ public class Atividade {
 
 	public void setPreco(Double preco) {
 		this.preco = preco;
+	}
+
+	
+	public Set<Participante> getParticipantes() {
+		return participantes;
+	}
+
+	public void setParticipantes(Set<Participante> participantes) {
+		this.participantes = participantes;
+	}
+
+	public Categoria getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
+	}
+
+	public Bloco getBlocos() {
+		return blocos;
+	}
+
+	public void setBlocos(Bloco blocos) {
+		this.blocos = blocos;
 	}	
 	
 	

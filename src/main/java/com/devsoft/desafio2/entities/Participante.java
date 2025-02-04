@@ -3,7 +3,6 @@ package com.devsoft.desafio2.entities;
 import java.util.HashSet;
 import java.util.Set;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -20,9 +19,7 @@ public class Participante {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	private String nome;
-	
-	@Column(unique = true)
+	private String nome;	
 	private String email;
 	
 	//de Atividade para Participante: muitos-para-muitos
@@ -32,6 +29,9 @@ public class Participante {
 			inverseJoinColumns = @JoinColumn(name = "atividade_id"))
 	private Set<Atividade> atividades = new HashSet<>(); //"Set" para informar ao JPA que não pode haver repetição na listagem
 	
+	
+	
+
 	public Participante() {
 	}
 
@@ -67,5 +67,11 @@ public class Participante {
 	}
 	
 	
-	
+	public Set<Atividade> getAtividades() {
+		return atividades;
+	}
+
+	public void setAtividades(Set<Atividade> atividades) {
+		this.atividades = atividades;
+	}
 }
