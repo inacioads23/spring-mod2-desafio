@@ -1,6 +1,6 @@
 # Desafio módulo 2 - Spring: Modelo de domínio e ORM
 
-Você deve criar um projeto no Spring Boot com Java e banco de dados H2, e implementar o modelo conceitual conforme especificação a seguir. Além disso, você deve fazer o seeding da base de dados conforme diagrama de objetos que segue.
+Criar um projeto no Spring Boot com Java e banco de dados H2, e implementar o modelo conceitual conforme especificação a seguir. Além disso, fazer o _seeding_ da base de dados conforme diagrama de objetos que segue.
 
 ## Fazendo o teste do projeto
 
