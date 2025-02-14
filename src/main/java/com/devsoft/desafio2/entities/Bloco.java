@@ -25,7 +25,7 @@ public class Bloco {
 	@Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
 	private Instant fim;	
 	
-	//de Bloco para Atividade: muitos-para-um. Nome do relacionamento: atividade
+	// De Bloco para Atividade
 	@ManyToOne
 	@JoinColumn(name = "atividade_id")
 	private Atividade atividade;
@@ -64,6 +64,17 @@ public class Bloco {
 	public void setFim(Instant fim) {
 		this.fim = fim;
 	}
+
+	
+	public Atividade getAtividade() {
+		return atividade;
+	}
+
+	public void setAtividade(Atividade atividade) {
+		this.atividade = atividade;
+	}
+
+
 	
 	
 	

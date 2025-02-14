@@ -3,6 +3,7 @@ package com.devsoft.desafio2.entities;
 import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -19,10 +20,11 @@ public class Categoria {
 	private Integer id;
 	private String descricao;
 	
-	//de Categoria para Atividade: uma-para-muitos. Nome do relacionamento: atividades
-	@OneToMany(mappedBy = "categoria")
+	// De Categoria para Atividade
+	@OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Atividade> atividades = new ArrayList<>();	
 
+	
 	public Categoria() {
 	}
 

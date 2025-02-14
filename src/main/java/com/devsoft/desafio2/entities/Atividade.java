@@ -1,18 +1,20 @@
 package com.devsoft.desafio2.entities;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -28,18 +30,22 @@ public class Atividade {
 	private String descricao;
 	private Double preco;
 	
-	
-	@ManyToMany(mappedBy = "atividades")
-    private Set<Participante> participantes = new HashSet<>();
-    
+	// De Atividade para Participante
+	@ManyToMany
+	@JoinTable(name = "tb_atividade_participante",
+			joinColumns = @JoinColumn(name = "atividade_id"),
+			inverseJoinColumns = @JoinColumn(name = "participante_id"))
+	private Set<Participante> participantes = new HashSet<>(); //"Set" para informar ao JPA que não pode haver repetição na listagem
+		
+	// De Atividade para Categoria
     @ManyToOne
     @JoinColumn(name = "categoria_id")
-    private Categoria categoria;
-    
-    @OneToOne(mappedBy = "atividade", cascade = CascadeType.ALL)
-    private Bloco blocos;   
+    private Categoria categoria;    
+      
+    // De Atividade para Bloco
+    @OneToMany(mappedBy = "atividade")
+    private List<Bloco> blocos = new ArrayList<>();
    
-
 	
 	public Atividade() {
 	}
@@ -83,8 +89,8 @@ public class Atividade {
 	public void setPreco(Double preco) {
 		this.preco = preco;
 	}
-
 	
+		
 	public Set<Participante> getParticipantes() {
 		return participantes;
 	}
@@ -92,7 +98,7 @@ public class Atividade {
 	public void setParticipantes(Set<Participante> participantes) {
 		this.participantes = participantes;
 	}
-
+		
 	public Categoria getCategoria() {
 		return categoria;
 	}
@@ -101,13 +107,16 @@ public class Atividade {
 		this.categoria = categoria;
 	}
 
-	public Bloco getBlocos() {
+	public List<Bloco> getBlocos() {
 		return blocos;
 	}
 
-	public void setBlocos(Bloco blocos) {
+	public void setBlocos(List<Bloco> blocos) {
 		this.blocos = blocos;
-	}	
+	}
+	
+	
+	
 	
 	
 	
